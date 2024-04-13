@@ -3,13 +3,13 @@
 <div class="row justify-content-center">
 <h3 class="row justify-content-center">Your Fleet</h3>
 <table class="table table-bordered" style="width:400px; height:400px; border-collapse: collapse;">
-    @for (int i = 0; i < 10; i++)
+ @*    @for (int i = 0; i < 10; i++)
     {
         <tr style="height: calc(100% / 10);">
             @for (int j = 0; j < 10; j++)
             {   
                 ShipDto? selectedShip = AllShips.FirstOrDefault(ship =>
-                ship.CoveringAera.Any(node => node.rowValue == i && node.colValue == j));
+                ship.CoveringAera.Any(node => node.RowValue == i && node.ColValue == j));
 
                 <td @onclick="() => HandleClick(i, j)" style="width: calc(100% / 10); border: 1px solid black;">
                     @if(selectedShip!=null)
@@ -23,7 +23,7 @@
                  </td>
             }
         </tr>
-    }
+    } *@
 </table>
 <table class="table table-bordered" style="width:400px; border-collapse: collapse;">
     <tr><th>Ship</th><th>Total Hits</th><th>Status</th></tr>
@@ -46,43 +46,43 @@
     protected override async Task OnInitializedAsync()
     {
         AllShips = new List<ShipDto>();
-        AllShips.Add(new ShipDto() 
-        { Name = "B1", 
-        Size = 5, 
-        Hits = 0, 
-        CoveringAera =new List<Node>() 
-            {
-                new Node(1,4),
-                new Node(1,5),
-                new Node(1,6),
-                new Node(1,7),
-                new Node(1,8)
-            }
-        });
+        // AllShips.Add(new ShipDto() 
+        // { Name = "B1", 
+        // Size = 5, 
+        // Hits = 0, 
+        // CoveringAera =new List<Node>() 
+        //     {
+        //         new Node(1,4),
+        //         new Node(1,5),
+        //         new Node(1,6),
+        //         new Node(1,7),
+        //         new Node(1,8)
+        //     }
+        // });
 
-        AllShips.Add(new ShipDto()
-            {
-                Name = "D1",
-                Size = 2,
-                Hits = 0,
-                CoveringAera = new List<Node>()
-            {
-                new Node(1,4),
-                new Node(2,4)                
-            }
-            });
+        // AllShips.Add(new ShipDto()
+        //     {
+        //         Name = "D1",
+        //         Size = 2,
+        //         Hits = 0,
+        //         CoveringAera = new List<Node>()
+        //     {
+        //         new Node(1,4),
+        //         new Node(2,4)                
+        //     }
+        //     });
 
-        AllShips.Add(new ShipDto()
-            {
-                Name = "D2",
-                Size = 2,
-                Hits = 0,
-                CoveringAera = new List<Node>()
-            {
-                new Node(7,7),
-                new Node(7,8)
-            }
-            });
+        // AllShips.Add(new ShipDto()
+        //     {
+        //         Name = "D2",
+        //         Size = 2,
+        //         Hits = 0,
+        //         CoveringAera = new List<Node>()
+        //     {
+        //         new Node(7,7),
+        //         new Node(7,8)
+        //     }
+        //     });
 
 
     //Ships = await Http.GetFromJsonAsync<IEnumerable<ShipDto>>("api/GameBoard/GetPlayerPlaceShips");

@@ -19,51 +19,63 @@ namespace BattleShip.WebAPI.Controllers
             this._gameBoardRepository = gameBoardRepository;
         }
 
+       
+       
         [HttpGet]
-        [Route(nameof(GetComputerPlaceShips))]
-        public async Task<List<ShipDto>> GetComputerPlaceShips()
+        [Route(nameof(GetComputerPlaceShipsDemo))]
+        public async Task<ActionResult<IEnumerable<ShipDto>>> GetComputerPlaceShipsDemo()
         {
-            List<ShipDto> result = await _gameBoardRepository.GetComputerPlaceShip();
-            return result;
-        }
 
-        [HttpGet]
-        public  ActionResult<IEnumerable<ShipDto>> GetShipDemo()
-        {
-            List<ShipDto> AllShips = new List<ShipDto>();
-            AllShips.Add(new ShipDto()
+            try
             {
-                Name = "B1",
-                Size = 5,
-                Hits = 0,
-                CoveringAera = new List<Node>()
-            {
-                new Node(1,4),
-                new Node(1,5),
-                new Node(1,6),
-                new Node(1,7),
-                new Node(1,8)
+                var ships = await _gameBoardRepository.GetComputerPlaceShip();
+
+                if (ships == null)
+                {
+                    return NotFound();
+                }
+                else
+                {                    
+                    return Ok(ships);
+                }
             }
-            });
-            return AllShips;
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retriving data from the databse");
+            }
         }
 
-            //[HttpGet]
-            //[Route(nameof(GetPlayerPlaceShips))]
-            //public ActionResult<IEnumerable<ShipDto>> GetPlayerPlaceShips()
-            //{
-            //    var ships = _gameBoardRepository.GetPlayerPlaceShip().Cast<Ship>();
-            //    if(ships !=null)
-            //    {
-            //       return Ok(DtoConvertions.ShipToShipDto(ships));
-            //    }
-            //    else
-            //    {
-            //       return NotFound();
-            //    }
-
-            //}
 
 
+        [HttpGet]
+        [Route(nameof(GetShips))]
+        public async Task<ActionResult<IEnumerable<BattleShipDto>>> GetShips()
+        {
+            try
+            {
+                var ships = await _gameBoardRepository.GetShips();
+
+                if (ships == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    //var productDtos = products.ConvertToDto();
+                    return Ok(ships);
+                }
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Error retriving data from the databse");
+
+            }
         }
+
+
+
+        
+
+
+    }
 }

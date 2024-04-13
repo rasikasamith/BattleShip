@@ -4,6 +4,13 @@ namespace BattleShip.UI.Service.Contracts
 {
     public interface IShipService
     {
-        Task<List<ShipDto>> GetAllShips();
+     
+
+        Task<IEnumerable<ShipDto>> GetAllShipsDemo();
+
+        Task<IEnumerable<BattleShipDto>> GetShips();
+
+
+
     }
 }

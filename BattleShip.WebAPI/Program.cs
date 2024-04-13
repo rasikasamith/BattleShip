@@ -1,6 +1,7 @@
 
 using BattleShip.WebAPI.Repositories;
 using BattleShip.WebAPI.Repositories.Contracts;
+using Microsoft.Net.Http.Headers;
 
 namespace BattleShip.WebAPI
 {
@@ -28,6 +29,13 @@ namespace BattleShip.WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            //Add these lines to give permissions to access
+            app.UseCors(policy =>
+            policy.WithOrigins("http://localhost:7253","https://localhost:7253")
+            .AllowAnyMethod()
+            .WithHeaders(HeaderNames.ContentType)
+            );        
 
             app.UseHttpsRedirection();
 

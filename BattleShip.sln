@@ -5,9 +5,9 @@ VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleShip.WebAPI", "BattleShip.WebAPI\BattleShip.WebAPI.csproj", "{59AA7FCB-C55C-4DB7-8D81-E5F0C67A3088}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleShip.UI", "BattleShip.UI\BattleShip.UI.csproj", "{78E6377F-F0C2-4304-B1CD-626AF7E38DED}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleShip.UI", "BattleShip.UI\BattleShip.UI.csproj", "{78E6377F-F0C2-4304-B1CD-626AF7E38DED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleShip.Models", "BattleShip.Models\BattleShip.Models.csproj", "{4BA5BB6B-F94A-4D32-9DC5-09EB1C7D69A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleShip.Models", "BattleShip.Models\BattleShip.Models.csproj", "{4BA5BB6B-F94A-4D32-9DC5-09EB1C7D69A4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

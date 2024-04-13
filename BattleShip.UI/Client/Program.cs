@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using BattleShip.UI;
 using BattleShip.UI.Service.Contracts;
 using BattleShip.UI.Service;
+using Microsoft.JSInterop;
 
 namespace BattleShip.UI;
 
@@ -14,10 +15,10 @@ public class Program
         builder.RootComponents.Add<App>("#app");
         builder.RootComponents.Add<HeadOutlet>("head::after");
 
-        builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+        builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7237/") });
 
         builder.Services.AddScoped<IShipService, ShipService>();
-        //builder.Services.AddSingleton<IShipService, ShipService>();
+        
 
         await builder.Build().RunAsync();
     }

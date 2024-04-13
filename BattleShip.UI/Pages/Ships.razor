@@ -1,0 +1,49 @@
+﻿@page "/ships"
+@inherits ShipsBase
+
+@if(Ships==null)
+{
+    <h3>Loading Ships</h3>
+}
+else
+{
+    <h3>Ships</h3>
+    var shipCount = Ships.Count();
+
+   @*  @if (shipCount>0)
+    {
+        @for (int i = 0; i < shipCount;i++)
+        {
+            <span>@shipCount</span>
+        }
+    } *@
+
+    //
+    @if (Ships != null && Ships.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Ship Name</th>
+                    <th>Size</th>
+                    <th>Hits</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var ship in Ships)
+                {
+                    <tr>
+                        <td>@ship.Name</td>
+                        <td>@ship.Size</td>
+                        <td>@ship.Hits</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No ships found.</p>
+    }
+
+}

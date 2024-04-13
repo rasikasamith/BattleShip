@@ -1,9 +1,9 @@
 ﻿@page "/computer-grid"
+@inherits ComputerGridBase;
+
 @using BattleShip.Models
 @using BattleShip.UI.Service.Contracts
 
-@inject IJSRuntime JsRuntime
-@inject IShipService ShipService 
 
 <div class="row justify-content-center">
 <h3 class="row justify-content-center">Enemy Fleet</h3>
@@ -15,19 +15,24 @@
         <tr style="height: calc(100% / 10);">
             @for (int j = 0; j < 10; j++)
             {
-                ShipDto? selectedShip = AllShips.FirstOrDefault(ship =>
-                ship.CoveringAera.Any(node => node.rowValue == i && node.colValue == j));
-                String NodeStatus = "34D1";
-                <td @onclick="() => HandleClick(i, j,NodeStatus)"
-                    style="width: calc(100% / 10); border: 1px solid black; background-color: lightblue">
-                    
+              
+                ShipDto? selectedShip = AllShipsDemo?.FirstOrDefault(ship =>
+                                        ship.CoveringAera.Any(node => node.RowValue == i && node.ColValue == j));
+
+                String position = i.ToString()+","+j.ToString();
+
+                    <td @onclick="() => HandleClick(position)"
+                    style="width: calc(100% / 10); border: 1px solid black; background-color: lightblue">                     
+
                     @if (selectedShip != null)
-                    {
+                    {   
                         <span id="shipInfo" hidden="hidden">@i;@j;@selectedShip.Name;</span>
+                           @*  <span id="shipInfo" >@i;@j;@selectedShip.Name;</span> *@
                     }
                     else
                     {
                         <span id="shipInfo" hidden="hidden">@i;@j;N</span>
+                          @*   <span id="shipInfo" >@i;@j;N</span> *@
                     }
                 </td>
             }
@@ -36,80 +41,17 @@
 </table>
 <table class="table table-bordered row" style="width:400px; border-collapse: collapse;">
         <tr style="text-align:center"><th>Ship</th><th>Total Hits</th><th>Status</th></tr>
-    <tr><td>BattleShip</td><td>3</td><td>Partially Damaged</td></tr>
-    <tr><td>Distroyer 1</td><td>2</td><td>Sinked</td></tr>
-    <tr><td>Distroyer 2</td><td>0</td><td>No Damaged</td></tr>
+    <tr><td>BattleShip</td><td>3/5</td><td>Partially Damaged</td></tr>
+    <tr><td>Distroyer 1</td><td>2/2</td><td>Sinked</td></tr>
+    <tr><td>Distroyer 2</td><td>0/2</td><td>No Damaged</td></tr>
     <tr><td style="font-size:larger">Score</td><td colspan="2" style="color:darkred;font-size:larger;text-align:center" >500</td></tr>
 </table>     
  
 </div>
 
-@code {
-    IEnumerable<ShipDto> Ships;
-    List<ShipDto> AllShips;
-   
-    protected override async Task OnInitializedAsync()
-    {
-        // AllShips = new List<ShipDto>();
-        // AllShips.Add(new ShipDto()
-        //     {
-        //         Name = "B1",
-        //         Size = 5,
-        //         Hits = 0,
-        //         CoveringAera = new List<Node>()
-        //     {
-        //         new Node(1,4),
-        //         new Node(1,5),
-        //         new Node(1,6),
-        //         new Node(1,7),
-        //         new Node(1,8)
-        //     }
-        //     });
-
-        // AllShips.Add(new ShipDto()
-        //     {
-        //         Name = "D1",
-        //         Size = 2,
-        //         Hits = 0,
-        //         CoveringAera = new List<Node>()
-        //     {
-        //         new Node(1,4),
-        //         new Node(2,4)
-        //     }
-        //     });
-
-        // AllShips.Add(new ShipDto()
-        //     {
-        //         Name = "D2",
-        //         Size = 2,
-        //         Hits = 0,
-        //         CoveringAera = new List<Node>()
-        //     {
-        //         new Node(7,7),
-        //         new Node(7,8)
-        //     }
-        //     });
-
-
-        //AllShips = await Http.GetFromJsonAsync<IEnumerable<ShipDto>>("api/GameBoard/GetPlayerPlaceShips");
-        AllShips =await ShipService.GetAllShips();
-        
-    }
-
-
-    // Define a list to track clicked positions
-    List<(int, int)> ClickedPositions = new List<(int, int)>();
-
-    // Method to handle cell clicks
-    void HandleClick(int row, int col,string innerHtml)
-    {
-       
-        JsRuntime.InvokeVoidAsync("alert", $"{row}, {col}");
-
-        // Add the clicked position to the list
-        ClickedPositions.Add((row, col));
-
-        // Trigger UI update
-        StateHasChanged();
-    }
+@foreach (var item in ClickedPositions)
+{
+    <div>@item.Item1,@item.Item2</div>
 }
+
+

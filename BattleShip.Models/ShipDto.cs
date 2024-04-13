@@ -13,15 +13,21 @@ namespace BattleShip.Models
         public int Hits { get; set; }
         public List<Node> CoveringAera { get; set; }
     }
+   
 
     public class Node
     {
-        public Node(int row,int col)
+        public Node(int rowValue, int colValue, bool isHit)
         {
-            rowValue = row;
-            colValue = col;
+            RowValue = rowValue;
+            ColValue = colValue;
+            IsHit = isHit;
         }
-        public  int rowValue { get; set; }
-        public  int colValue { get; set; }
+
+        public int RowValue { get; set; }
+        public int ColValue { get; set; }
+        public bool IsHit { get; set; }
     }
+
+
 }

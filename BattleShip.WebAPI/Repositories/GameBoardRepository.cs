@@ -1,6 +1,7 @@
 ﻿using BattleShip.Models;
 using BattleShip.WebAPI.Models;
 using BattleShip.WebAPI.Repositories.Contracts;
+using System.Drawing;
 
 namespace BattleShip.WebAPI.Repositories
 {
@@ -10,34 +11,22 @@ namespace BattleShip.WebAPI.Repositories
         int BoardSize = 10;
 
         public async Task<List<ShipDto>> GetComputerPlaceShip()
-        {
-            //Ship[,] ComputerPlaceShips = new Ship[BoardSize, BoardSize];
-            //ComputerPlaceShips[1, 2] = new Ship("B1", 5);
-            //ComputerPlaceShips[2, 2] = new Ship("B1", 5);
-            //ComputerPlaceShips[3, 2] = new Ship("B1", 5);
-            //ComputerPlaceShips[4, 2] = new Ship("B1", 5);
-            //ComputerPlaceShips[5, 2] = new Ship("B1", 5);
-
-            //ComputerPlaceShips[1, 6] = new Ship("D1", 2);
-            //ComputerPlaceShips[1, 6] = new Ship("D1", 2);
-
-            //ComputerPlaceShips[7, 7] = new Ship("D2", 2);
-            //ComputerPlaceShips[7, 8] = new Ship("D2", 2);
-
+        {  
             List<ShipDto> AllShips = new List<ShipDto>();
+            
             AllShips.Add(new ShipDto()
             {
                 Name = "B1",
                 Size = 5,
                 Hits = 0,
                 CoveringAera = new List<Node>()
-            {
-                new Node(1,4),
-                new Node(1,5),
-                new Node(1,6),
-                new Node(1,7),
-                new Node(1,8)
-            }
+                {
+                    new Node(1,4,false),
+                    new Node(1,5,false),
+                    new Node(1,6,false),
+                    new Node(1,7,false),
+                    new Node(1,8,false)
+                }
             });
 
             AllShips.Add(new ShipDto()
@@ -45,11 +34,11 @@ namespace BattleShip.WebAPI.Repositories
                 Name = "D1",
                 Size = 2,
                 Hits = 0,
-                CoveringAera = new List<Node>()
-            {
-                new Node(1,4),
-                new Node(2,4)
-            }
+                    CoveringAera = new List<Node>()
+                {
+                    new Node(1,3,false),
+                    new Node(2,3,false)
+                }
             });
 
             AllShips.Add(new ShipDto()
@@ -57,32 +46,38 @@ namespace BattleShip.WebAPI.Repositories
                 Name = "D2",
                 Size = 2,
                 Hits = 0,
-                CoveringAera = new List<Node>()
-            {
-                new Node(7,7),
-                new Node(7,8)
-            }
+                    CoveringAera = new List<Node>()
+                {
+                    new Node(7,7,false),
+                    new Node(7,8,false)
+                }
             });
 
             return AllShips;
         }
 
-        public Ship[,] GetPlayerPlaceShip()
+        public async Task<List<BattleShipDto>> GetShips()
         {
-            Ship[,] PlayerPlaceShips = new Ship[BoardSize, BoardSize];
-            PlayerPlaceShips[4, 2] = new Ship("B1", 5);
-            PlayerPlaceShips[5, 2] = new Ship("B1", 5);
-            PlayerPlaceShips[6, 2] = new Ship("B1", 5);
-            PlayerPlaceShips[7, 2] = new Ship("B1", 5);
-            PlayerPlaceShips[8, 2] = new Ship("B1", 5);
-
-            PlayerPlaceShips[1, 4] = new Ship("D1", 2);
-            PlayerPlaceShips[2, 4] = new Ship("D1", 2);
-
-            PlayerPlaceShips[7, 7] = new Ship("D2", 2);
-            PlayerPlaceShips[7, 8] = new Ship("D2", 2);
-
-            return PlayerPlaceShips;
+           List<BattleShipDto> AllBattleShips = new List<BattleShipDto>();
+            AllBattleShips.Add(new BattleShipDto() 
+            {   
+                Name="B1",
+                Size = 5,
+                Hits = 0}
+            );
+            AllBattleShips.Add(new BattleShipDto()
+            {
+                Name = "D1",
+                Size = 2,
+                Hits = 1
+            });
+            AllBattleShips.Add(new BattleShipDto()
+            {
+                Name = "D2",
+                Size = 2,
+                Hits = 2
+            });
+            return AllBattleShips;
         }
     }
 }
