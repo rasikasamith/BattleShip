@@ -11,23 +11,6 @@ namespace BattleShip.Models
         public string Name { get; set; }
         public int Size { get; set; }
         public int Hits { get; set; }
-        public List<Node> CoveringAera { get; set; }
+        public List<NodeDto> CoveringAera { get; set; }
     }
-   
-
-    public class Node
-    {
-        public Node(int rowValue, int colValue, bool isHit)
-        {
-            RowValue = rowValue;
-            ColValue = colValue;
-            IsHit = isHit;
-        }
-
-        public int RowValue { get; set; }
-        public int ColValue { get; set; }
-        public bool IsHit { get; set; }
-    }
-
-
 }

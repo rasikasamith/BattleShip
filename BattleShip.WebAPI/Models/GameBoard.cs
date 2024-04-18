@@ -27,8 +27,7 @@
                 {
                     Ships[row+1, column] = ship;
                 }
-            }
-            
+            }            
         }
 
         public bool Attack(int row,int column)

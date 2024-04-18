@@ -1,6 +1,7 @@
 ﻿using BattleShip.Models;
 using BattleShip.WebAPI.Models;
 using BattleShip.WebAPI.Repositories.Contracts;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace BattleShip.WebAPI.Repositories
@@ -9,23 +10,25 @@ namespace BattleShip.WebAPI.Repositories
     {
         public Ship[,] Ships { get; set; }
         int BoardSize = 10;
+        public List<ShipDto> AllShips { get; set; }
+        public int tempNum = 12;
 
-        public async Task<List<ShipDto>> GetComputerPlaceShip()
-        {  
-            List<ShipDto> AllShips = new List<ShipDto>();
-            
+        public List<(int, int)> SuccesfullTargerts = new List<(int, int)>();
+
+        public GameBoardRepository() {
+            AllShips=new List<ShipDto>();
             AllShips.Add(new ShipDto()
             {
                 Name = "B1",
                 Size = 5,
                 Hits = 0,
-                CoveringAera = new List<Node>()
+                CoveringAera = new List<NodeDto>()
                 {
-                    new Node(1,4,false),
-                    new Node(1,5,false),
-                    new Node(1,6,false),
-                    new Node(1,7,false),
-                    new Node(1,8,false)
+                    new NodeDto(1,4,false,false),
+                    new NodeDto(1,5,false,false),
+                    new NodeDto(1,6,false,false),
+                    new NodeDto(1,7,false,false),
+                    new NodeDto(1,8,false,false)
                 }
             });
 
@@ -34,10 +37,10 @@ namespace BattleShip.WebAPI.Repositories
                 Name = "D1",
                 Size = 2,
                 Hits = 0,
-                    CoveringAera = new List<Node>()
+                CoveringAera = new List<NodeDto>()
                 {
-                    new Node(1,3,false),
-                    new Node(2,3,false)
+                    new NodeDto(1,3,false,false),
+                    new NodeDto(2,3,false,false)
                 }
             });
 
@@ -46,38 +49,116 @@ namespace BattleShip.WebAPI.Repositories
                 Name = "D2",
                 Size = 2,
                 Hits = 0,
-                    CoveringAera = new List<Node>()
+                CoveringAera = new List<NodeDto>()
                 {
-                    new Node(7,7,false),
-                    new Node(7,8,false)
+                    new NodeDto(7,7,false, false),
+                    new NodeDto(7,8,false, false)
                 }
             });
 
-            return AllShips;
+            tempNum = 18;
+
         }
 
-        public async Task<List<BattleShipDto>> GetShips()
+
+        public async Task<List<ShipDto>> GetComputerPlaceShip()
         {
-           List<BattleShipDto> AllBattleShips = new List<BattleShipDto>();
-            AllBattleShips.Add(new BattleShipDto() 
-            {   
-                Name="B1",
-                Size = 5,
-                Hits = 0}
-            );
-            AllBattleShips.Add(new BattleShipDto()
-            {
-                Name = "D1",
-                Size = 2,
-                Hits = 1
-            });
-            AllBattleShips.Add(new BattleShipDto()
-            {
-                Name = "D2",
-                Size = 2,
-                Hits = 2
-            });
-            return AllBattleShips;
+            var res = SuccesfullTargerts;
+            return AllShips;
+        }      
+
+        public async Task<bool> Hit(int row, int col)
+        {
+            //var result = from sh in AllShips
+            //             where sh.CoveringAera.Any(x => (x.RowValue == row) && (x.ColValue == col))
+            //             select new
+            //             {
+            //                 Name = sh.Name,
+            //                 Size = sh.Size,
+            //                 Hits = sh.Hits
+            //             };
+           
+            //AllShips[0].CoveringAera[1].IsHit = true;
+            //return true;
+            
+                foreach (var item in AllShips)
+                {
+                    foreach (var node in item.CoveringAera)
+                    {
+                        if ((node.RowValue == row) && (node.ColValue == col))
+                        {
+                            node.IsHit = true;
+                            //node.IsClick = true;
+                        }
+                        else
+                        {
+                            node.IsClick = true;
+                        }
+
+                            
+                    }
+                }
+                return true;        
+
+
+
+            //// Find the ship that covers the specified position
+            //var ship = AllShips.FirstOrDefault(s => s.CoveringAera.Any(n => n.RowValue == row && n.ColValue == col));
+
+            //if (ship != null)
+            //{
+            //    // Find the node in the covering area of the ship
+            //    var node = ship.CoveringAera.FirstOrDefault(n => n.RowValue == row && n.ColValue == col);
+
+            //    if (node != null)
+            //    {
+            //        // Mark the node as hit
+            //        node.IsHit = true;
+
+            //        // Update Hits count of the ship if necessary
+            //        //if (!node.IsHit)
+            //        //{
+            //        //    ship.Hits++;
+            //        //}
+
+            //        // You may want to perform any additional logic here, such as checking if the ship is sunk
+            //    }
+            //}
         }
+
+        public async Task<IEnumerable<ShipDto>> GetAllUpdatedShips( int row, int col)
+        {
+            foreach (var item in AllShips)
+            {
+                foreach (var node in item.CoveringAera)
+                {
+                    if ((node.RowValue == row) && (node.ColValue == col))
+                    {
+                        node.IsHit = true;
+                    }
+                }
+            }
+
+            //AllShips[0].Name = "B1U";
+            //AllShips[0].CoveringAera[2].IsHit = true;
+
+            IEnumerable<ShipDto> AllShipsUpdated = AllShips;
+
+            //Add fired node
+            SuccesfullTargerts.Add((row, col));
+
+            return AllShipsUpdated;
+        }
+
+
+        public async Task GetTempNum_1()
+        {
+            tempNum = 24;            
+        }
+        public async Task<int> GetTempNum_2()
+        {               
+            return tempNum;  
+        }
+
     }
 }

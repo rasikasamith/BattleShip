@@ -1,6 +1,7 @@
 ﻿using BattleShip.Models;
 using BattleShip.WebAPI.Extentions;
 using BattleShip.WebAPI.Models;
+using BattleShip.WebAPI.Repositories;
 using BattleShip.WebAPI.Repositories.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -9,17 +10,31 @@ using System.Collections.Generic;
 namespace BattleShip.WebAPI.Controllers
 {
     [Route("api/[controller]")]
-    //[Route("[controller]")]
     [ApiController]
     public class GameBoardController : ControllerBase
     {
         IGameBoardRepository _gameBoardRepository;
+        //Test
+        //private readonly List<string> dataList = new List<string>();
+       
+        //[HttpGet(nameof(GetData))]
+        //public ActionResult<IEnumerable<string>> GetData()
+        //{
+        //    return Ok(dataList);
+        //}
+
+        //[HttpPost]
+        //public IActionResult AddData(string data)
+        //{
+        //    dataList.Add(data);
+        //    return Ok();
+        //}
+
+        //End
         public GameBoardController(IGameBoardRepository gameBoardRepository)
         {
             this._gameBoardRepository = gameBoardRepository;
-        }
-
-       
+        }       
        
         [HttpGet]
         [Route(nameof(GetComputerPlaceShipsDemo))]
@@ -45,37 +60,60 @@ namespace BattleShip.WebAPI.Controllers
             }
         }
 
-
-
-        [HttpGet]
-        [Route(nameof(GetShips))]
-        public async Task<ActionResult<IEnumerable<BattleShipDto>>> GetShips()
+        
+        [HttpGet("FireShot/{row:int}/{col:int}")]
+        public async Task<bool> UserFireAShot(int row, int col)
         {
             try
             {
-                var ships = await _gameBoardRepository.GetShips();
+                var ships = await _gameBoardRepository.GetComputerPlaceShip();
 
-                if (ships == null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    //var productDtos = products.ConvertToDto();
-                    return Ok(ships);
-                }
+                var result = from sh in ships
+                             where sh.CoveringAera.Any(x => (x.RowValue == row) && (x.ColValue == col))
+                             select new
+                             {
+                                 Name = sh.Name,
+                                 Size = sh.Size,
+                                 Hits = sh.Hits
+                             };                
+
+                var hit = result.Any();
+                return hit;
             }
             catch (Exception)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, "Error retriving data from the databse");
-
+                throw;
             }
         }
+     
+        [HttpGet("GetUpdatedShips/{row:int}/{col:int}")]
+        public async Task<IEnumerable<ShipDto>> GetAllUpdatedShips(int row, int col)
+        {
+            try
+            {
+                var result = await _gameBoardRepository.GetAllUpdatedShips(row, col);
+                return result;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }        
 
+        [HttpGet]
+        [Route(nameof(GetTempNum))]
+        public async Task<int> GetTempNum()
+        {
+            await _gameBoardRepository.GetTempNum_1();
+            var TempNum = await _gameBoardRepository.GetTempNum_2();
+            return TempNum;
+        }
 
-
-        
-
+        //[HttpGet("TestObjectTrn/{shipDtos:List<ShipDto>}")]
+        //public async Task<int> TestObjectTrn(List<ShipDto> shipDtos)
+        //{
+        //    return 3;
+        //}
 
     }
 }
