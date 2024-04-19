@@ -5,7 +5,7 @@
 @using BattleShip.UI.Service.Contracts
 
 <div class="row justify-content-center">
-<h3 class="row justify-content-center">Enemy Fleet</h3>
+<h2 class="row justify-content-center">Enemy Fleet</h2>
 <br /><br />
 <div class="row">
         <div class="col-md-6 row justify-content-end">
@@ -92,9 +92,9 @@
                     <tr style="text-align:center"><th>Ship</th><th>Total Hits</th><th>Status</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>BattleShip</td><td>3/5</td><td>Partially Damaged</td></tr>
-                    <tr><td>Distroyer 1</td><td>2/2</td><td>Sinked</td></tr>
-                    <tr><td>Distroyer 2</td><td>0/2</td><td>No Damaged</td></tr>
+                    <tr><td>BattleShip</td><td>@AllHits["BattleShip"].ToString()/5</td><td>@BattleShipStatus</td></tr>
+                    <tr><td>Distroyer 1</td><td>@AllHits["Distroyer_1"].ToString()/2</td><td>@Distroyer_1Status</td></tr>
+                    <tr><td>Distroyer 2</td><td>@AllHits["Distroyer_2"].ToString()/2</td><td>@Distroyer_2Status</td></tr>
                     <tr><td style="font-size:larger">Score</td><td colspan="2" style="color:darkred;font-size:larger;text-align:center"><span>@Marks</span></td></tr>
                 </tbody>
                

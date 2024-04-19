@@ -13,17 +13,17 @@
             Hits = 0;
         }
 
-        public bool IsSunk()
-        {
-            if(Size>=Hits)
-            {
-                return true;
-            }
-            else
-            {
-               return false;
-            }
-        }
+        //public bool IsSunk()
+        //{
+        //    if(Size>=Hits)
+        //    {
+        //        return true;
+        //    }
+        //    else
+        //    {
+        //       return false;
+        //    }
+        //}
 
     }
 }

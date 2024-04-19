@@ -19,7 +19,7 @@ namespace BattleShip.WebAPI.Repositories
             AllShips=new List<ShipDto>();
             AllShips.Add(new ShipDto()
             {
-                Name = "B1",
+                Name = "BattleShip",
                 Size = 5,
                 Hits = 0,
                 CoveringAera = new List<NodeDto>()
@@ -34,7 +34,7 @@ namespace BattleShip.WebAPI.Repositories
 
             AllShips.Add(new ShipDto()
             {
-                Name = "D1",
+                Name = "Distroyer_1",
                 Size = 2,
                 Hits = 0,
                 CoveringAera = new List<NodeDto>()
@@ -46,7 +46,7 @@ namespace BattleShip.WebAPI.Repositories
 
             AllShips.Add(new ShipDto()
             {
-                Name = "D2",
+                Name = "Distroyer_2",
                 Size = 2,
                 Hits = 0,
                 CoveringAera = new List<NodeDto>()
@@ -135,6 +135,7 @@ namespace BattleShip.WebAPI.Repositories
                     if ((node.RowValue == row) && (node.ColValue == col))
                     {
                         node.IsHit = true;
+                        item.Hits++;
                     }
                 }
             }

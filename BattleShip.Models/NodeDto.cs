@@ -18,7 +18,7 @@ namespace BattleShip.Models
 
         public int RowValue { get; set; }
         public int ColValue { get; set; }
-        public bool IsHit { get; set; }
+        public bool IsHit   { get; set; }
         public bool IsClick { get; set; }
     }
 }

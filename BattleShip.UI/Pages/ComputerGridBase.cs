@@ -29,16 +29,33 @@ namespace BattleShip.UI.Pages
 
         public bool IsClicked(int row, int col) => clickedCells.Contains((row, col));
 
+        public Dictionary<String, int> AllHits { get; set; } = new Dictionary<string, int>();
+        
+
 
         //public int TempNum { get; set; }
         public int Marks { get; set; } = 0;
 
         public List<ShipDto> LatestUpdateShips = new List<ShipDto>();
 
+        public ComputerGridBase()
+        {
+            AllHits = new Dictionary<string, int>()
+            {
+                { "BattleShip", 0 },
+                { "Distroyer_1", 0 },
+                { "Distroyer_2", 0 }
+            };
+        }
+
         protected override async Task OnInitializedAsync()
         {        
-                AllShipsDemo = (List<ShipDto>)await _shipService.GetAllShipsDemo();           
+            AllShipsDemo = (List<ShipDto>)await _shipService.GetAllShipsDemo();          
         }
+
+        public string BattleShipStatus = "No Damaged";
+        public string Distroyer_1Status = "No Damaged";
+        public string Distroyer_2Status = "No Damaged";
 
         // Method to handle cell clicks
         public async Task HandleClick(string position)
@@ -63,15 +80,75 @@ namespace BattleShip.UI.Pages
                             if((area.RowValue== location.Item1)&&(area.ColValue==location.Item2))
                             {
                                 area.IsHit = true;
+                                
                             }
-
+                            
                         }
-                    }
+                       
+                    }               
+                    
+                }
+                //test
+                var results = AllShipsDemo.Select(x => new { x.Name, x.Hits }).Where(x => x.Hits > 0).FirstOrDefault();
+
+                if (results.Name == "BattleShip")
+                {
+                    AllHits["BattleShip"] += 1;
+                }
+                if (results.Name == "Distroyer_1")
+                {
+                    AllHits["Distroyer_1"] += 1;
+                }
+                if (results.Name == "Distroyer_2")
+                {
+                    AllHits["Distroyer_2"] += 1;
                 }
 
-                Marks = Marks + 1000;
-                SuccesfullTargerts.Add((Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1])));
+                //BattleShip
+                if (AllHits["BattleShip"] == 0)
+                {
+                    BattleShipStatus = "No Damaged";
+                }
+                else if (AllHits["BattleShip"] > 0 && AllHits["BattleShip"] < 5)
+                {
+                    BattleShipStatus = "Partially Damaged";
+                }
+                else
+                {
+                    BattleShipStatus = "Sinked";
+                }
+
+                //Distroyer_1
+                if (AllHits["Distroyer_1"]==0)
+                {
+                    Distroyer_1Status = "No Damaged";
+                }
+                else if (AllHits["Distroyer_1"] > 0 && AllHits["Distroyer_1"] < 2)
+                {
+                    Distroyer_1Status = "Partially Damaged";
+                }
+                else 
+                {
+                    Distroyer_1Status = "Sinked";
+                }
+
+                //Distroyer_2
+                if (AllHits["Distroyer_2"]==0)
+                {
+                    Distroyer_2Status = "No Damaged";
+                }
+                else if (AllHits["Distroyer_2"] > 0 && AllHits["Distroyer_2"] < 2)
+                {
+                    Distroyer_2Status = "Partially Damaged";
+                }
+                else 
+                {
+                    Distroyer_2Status = "Sinked";
+                }
                 
+
+                Marks = Marks + 1000;
+                SuccesfullTargerts.Add((Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1])));               
             }
             else
             {
@@ -94,10 +171,11 @@ namespace BattleShip.UI.Pages
 
             }
 
-
             // Add the clicked position to the list
             //ClickedPositions.Add((Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1])));
-                                
+
+           
+
 
             StateHasChanged();
         }
