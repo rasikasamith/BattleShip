@@ -6,12 +6,11 @@ namespace BattleShip.UI.Service.Contracts
     {    
         Task<IEnumerable<ShipDto>> GetAllShipsDemo();
 
-        Task<IEnumerable<BattleShipDto>> GetShips();
-
         Task<bool> UserFireAShot(int row, int col);
 
         Task<IEnumerable<ShipDto>> GetAllUpdatedShips(int row, int col);
 
-        Task<int> GetTempNum();
+        //Task<IEnumerable<BattleShipDto>> GetShips();
+        //Task<int> GetTempNum();
     }
 }

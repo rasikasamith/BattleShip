@@ -1,6 +1,6 @@
 ﻿using BattleShip.Models;
 using BattleShip.WebAPI.Extentions;
-using BattleShip.WebAPI.Models;
+using BattleShip.WebAPI.Entities;
 using BattleShip.WebAPI.Repositories;
 using BattleShip.WebAPI.Repositories.Contracts;
 using Microsoft.AspNetCore.Http;
@@ -14,6 +14,7 @@ namespace BattleShip.WebAPI.Controllers
     public class GameBoardController : ControllerBase
     {
         IGameBoardRepository _gameBoardRepository;
+
         //Test
         //private readonly List<string> dataList = new List<string>();
        
@@ -59,8 +60,7 @@ namespace BattleShip.WebAPI.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, "Error retriving data from the databse");
             }
         }
-
-        
+                
         [HttpGet("FireShot/{row:int}/{col:int}")]
         public async Task<bool> UserFireAShot(int row, int col)
         {
@@ -100,14 +100,14 @@ namespace BattleShip.WebAPI.Controllers
             }
         }        
 
-        [HttpGet]
-        [Route(nameof(GetTempNum))]
-        public async Task<int> GetTempNum()
-        {
-            await _gameBoardRepository.GetTempNum_1();
-            var TempNum = await _gameBoardRepository.GetTempNum_2();
-            return TempNum;
-        }
+        //[HttpGet]
+        //[Route(nameof(GetTempNum))]
+        //public async Task<int> GetTempNum()
+        //{
+        //    await _gameBoardRepository.GetTempNum_1();
+        //    var TempNum = await _gameBoardRepository.GetTempNum_2();
+        //    return TempNum;
+        //}
 
         //[HttpGet("TestObjectTrn/{shipDtos:List<ShipDto>}")]
         //public async Task<int> TestObjectTrn(List<ShipDto> shipDtos)

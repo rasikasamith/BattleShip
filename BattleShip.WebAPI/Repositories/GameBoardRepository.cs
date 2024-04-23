@@ -1,5 +1,5 @@
 ﻿using BattleShip.Models;
-using BattleShip.WebAPI.Models;
+using BattleShip.WebAPI.Entities;
 using BattleShip.WebAPI.Repositories.Contracts;
 using System.Collections.Generic;
 using System.Drawing;
@@ -8,12 +8,12 @@ namespace BattleShip.WebAPI.Repositories
 {
     public class GameBoardRepository : IGameBoardRepository
     {
-        public Ship[,] Ships { get; set; }
-        int BoardSize = 10;
+        //public Ship[,] Ships { get; set; }        
         public List<ShipDto> AllShips { get; set; }
-        public int tempNum = 12;
-
         public List<(int, int)> SuccesfullTargerts = new List<(int, int)>();
+        public int tempNum = 12;
+        int BoardSize = 10;
+        
 
         public GameBoardRepository() {
             AllShips=new List<ShipDto>();
@@ -59,7 +59,6 @@ namespace BattleShip.WebAPI.Repositories
             tempNum = 18;
 
         }
-
 
         public async Task<List<ShipDto>> GetComputerPlaceShip()
         {
@@ -151,15 +150,14 @@ namespace BattleShip.WebAPI.Repositories
             return AllShipsUpdated;
         }
 
-
-        public async Task GetTempNum_1()
-        {
-            tempNum = 24;            
-        }
-        public async Task<int> GetTempNum_2()
-        {               
-            return tempNum;  
-        }
+        //public async Task GetTempNum_1()
+        //{
+        //    tempNum = 24;            
+        //}
+        //public async Task<int> GetTempNum_2()
+        //{               
+        //    return tempNum;  
+        //}
 
     }
 }

@@ -79,14 +79,7 @@
                 }
             </table>
         </div>
-        <div class="col-md-4">
-           @*  <table class="table table-bordered row" style=" border-collapse: collapse;">
-                <tr style="text-align:center"><th>Ship</th><th>Total Hits</th><th>Status</th></tr>
-                <tr><td>BattleShip</td><td>3/5</td><td>Partially Damaged</td></tr>
-                <tr><td>Distroyer 1</td><td>2/2</td><td>Sinked</td></tr>
-                <tr><td>Distroyer 2</td><td>0/2</td><td>No Damaged</td></tr>
-                <tr><td style="font-size:larger">Score</td><td></td><td style="color:darkred;font-size:larger;text-align:center"><span>@Marks</span></td></tr>
-            </table> *@
+        <div class="col-md-4">          
             <table class="table table-bordered" style=" border-collapse: collapse;">
                 <thead>
                     <tr style="text-align:center"><th>Ship</th><th>Total Hits</th><th>Status</th></tr>
@@ -96,30 +89,8 @@
                     <tr><td>Distroyer 1</td><td>@AllHits["Distroyer_1"].ToString()/2</td><td>@Distroyer_1Status</td></tr>
                     <tr><td>Distroyer 2</td><td>@AllHits["Distroyer_2"].ToString()/2</td><td>@Distroyer_2Status</td></tr>
                     <tr><td style="font-size:larger">Score</td><td colspan="2" style="color:darkred;font-size:larger;text-align:center"><span>@Marks</span></td></tr>
-                </tbody>
-               
+                </tbody>               
             </table>
         </div>
-</div>   
-
-    
- 
+</div> 
 </div>
-
-
-@* <h3>@TempNum</h3> *@
-
-
-@* @foreach (var item in SuccesfullTargerts)
-{
-    <h3>@item.Item1,@item.Item2</h3>
-} *@
-
-
-
-
-@* @foreach (var item in MissedTargets)
-{
-    <h3>@item.Item1,@item.Item2</h3>
-}
- *@

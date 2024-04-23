@@ -13,7 +13,7 @@ namespace BattleShip.UI.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            Ships=await ShipService.GetShips();
+            //Ships=await ShipService.GetShips();
         }
     }
 }

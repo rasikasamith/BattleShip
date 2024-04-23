@@ -16,11 +16,7 @@ namespace BattleShip.UI.Pages
         [Inject]
         IShipService _shipService { get; set; }
 
-        public List<ShipDto> AllShipsDemo { get; set; }
-        //public List<ShipDto> AllShipsDemoTemp { get; set; }
-
-        // Define a list to track clicked positions
-        //public List<(int, int)> ClickedPositions = new List<(int, int)>();
+        public List<ShipDto> AllShipsDemo { get; set; }            
 
         public List<(int, int)> SuccesfullTargerts = new List<(int, int)>();
         public List<(int, int)> MissedTargets = new List<(int, int)>();
@@ -29,14 +25,11 @@ namespace BattleShip.UI.Pages
 
         public bool IsClicked(int row, int col) => clickedCells.Contains((row, col));
 
-        public Dictionary<String, int> AllHits { get; set; } = new Dictionary<string, int>();
-        
-
-
-        //public int TempNum { get; set; }
+        public Dictionary<String, int> AllHits { get; set; } = new Dictionary<string, int>();        
+              
         public int Marks { get; set; } = 0;
 
-        public List<ShipDto> LatestUpdateShips = new List<ShipDto>();
+        //public List<ShipDto> LatestUpdateShips = new List<ShipDto>();
 
         public ComputerGridBase()
         {
@@ -53,7 +46,7 @@ namespace BattleShip.UI.Pages
             AllShipsDemo = (List<ShipDto>)await _shipService.GetAllShipsDemo();          
         }
 
-        public string BattleShipStatus = "No Damaged";
+        public string BattleShipStatus  = "No Damaged";
         public string Distroyer_1Status = "No Damaged";
         public string Distroyer_2Status = "No Damaged";
 
@@ -70,7 +63,7 @@ namespace BattleShip.UI.Pages
             {
                 //await _jSRuntime.InvokeVoidAsync("alert", "You hit the target");
                 AllShipsDemo = (List<ShipDto>)await _shipService.GetAllUpdatedShips(Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1]));
-                //test
+               
                 foreach (ShipDto ship in AllShipsDemo)
                 {
                     foreach (var area  in ship.CoveringAera)
@@ -81,14 +74,11 @@ namespace BattleShip.UI.Pages
                             {
                                 area.IsHit = true;
                                 
-                            }
-                            
-                        }
-                       
-                    }               
-                    
+                            }                            
+                        }                       
+                    }    
                 }
-                //test
+                
                 var results = AllShipsDemo.Select(x => new { x.Name, x.Hits }).Where(x => x.Hits > 0).FirstOrDefault();
 
                 if (results.Name == "BattleShip")
@@ -154,7 +144,7 @@ namespace BattleShip.UI.Pages
             {
                 //await _jSRuntime.InvokeVoidAsync("alert", "You missed the target");
                 MissedTargets.Add((Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1])));
-                //test
+                
                 foreach (ShipDto ship in AllShipsDemo)
                 {
                     foreach (var area in ship.CoveringAera)
@@ -169,13 +159,7 @@ namespace BattleShip.UI.Pages
                     }
                 }
 
-            }
-
-            // Add the clicked position to the list
-            //ClickedPositions.Add((Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1])));
-
-           
-
+            }   
 
             StateHasChanged();
         }
@@ -185,7 +169,7 @@ namespace BattleShip.UI.Pages
             if (!IsClicked(row, col))
             {
                 clickedCells.Add((row, col));
-                StateHasChanged(); // Notify Blazor to re-render the component
+                StateHasChanged(); 
             }
         }
 

@@ -1,5 +1,5 @@
 ﻿using BattleShip.Models;
-using BattleShip.WebAPI.Models;
+using BattleShip.WebAPI.Entities;
 
 namespace BattleShip.WebAPI.Extentions
 {

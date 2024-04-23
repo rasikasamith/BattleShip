@@ -20,42 +20,17 @@ namespace BattleShip.UI.Service
         {
             try
             {
-                //var response = await _httpClient.GetAsync("https://localhost:7237/api/GameBoard/GetComputerPlaceShipsDemo");
-                try
-                {
                     var response = await this._httpClient.GetFromJsonAsync<IEnumerable<ShipDto>>("api/GameBoard/GetComputerPlaceShipsDemo");
                     return response;
-                }
-                catch
-                {
-                    throw;
-                }
                
-
             }
             catch (Exception)
-            {
-                //Log exception
+            {                
                 throw;
             }
 
-        }            
-
-        public async Task<IEnumerable<BattleShipDto>> GetShips()
-        {
-            try
-            {
-                var ships = await this._httpClient.GetFromJsonAsync<IEnumerable<BattleShipDto>>("api/GameBoard/GetShips");
-                return ships;
-            }
-            catch (Exception)
-            {
-                //Log exception
-                throw;
-            }
         }
 
-        //Comment temporory
         public async Task<bool> UserFireAShot(int row, int col)
         {
             try
@@ -81,27 +56,37 @@ namespace BattleShip.UI.Service
 
         }
 
-        public async Task<IEnumerable<ShipDto>> GetAllUpdatedShips( int row, int col)
+        public async Task<IEnumerable<ShipDto>> GetAllUpdatedShips(int row, int col)
         {
             try
-            {                
+            {
                 var response = await this._httpClient.GetFromJsonAsync<List<ShipDto>>($"api/GameBoard/GetUpdatedShips/{row}/{col}");
                 return response;
             }
             catch
             {
-                throw;                   
+                throw;
             }
         }
 
-        public async Task<int> GetTempNum()
-        {
-            var response = await this._httpClient.GetAsync("api/GameBoard/GetTempNum");
-            return await response.Content.ReadFromJsonAsync<int>();
-            
-        }
+        //public async Task<IEnumerable<BattleShipDto>> GetShips()
+        //{
+        //    try
+        //    {
+        //        var ships = await this._httpClient.GetFromJsonAsync<IEnumerable<BattleShipDto>>("api/GameBoard/GetShips");
+        //        return ships;
+        //    }
+        //    catch (Exception)
+        //    {               
+        //        throw;
+        //    }
+        //}
 
-        
+        //public async Task<int> GetTempNum()
+        //{
+        //    var response = await this._httpClient.GetAsync("api/GameBoard/GetTempNum");
+        //    return await response.Content.ReadFromJsonAsync<int>();            
+        //}
 
     }
 

@@ -1,4 +1,4 @@
-﻿namespace BattleShip.WebAPI.Models
+﻿namespace BattleShip.WebAPI.Entities
 {
     public class Ship
     {
@@ -11,19 +11,7 @@
             Name = name;
             Size = size;
             Hits = 0;
-        }
-
-        //public bool IsSunk()
-        //{
-        //    if(Size>=Hits)
-        //    {
-        //        return true;
-        //    }
-        //    else
-        //    {
-        //       return false;
-        //    }
-        //}
+        }   
 
     }
 }

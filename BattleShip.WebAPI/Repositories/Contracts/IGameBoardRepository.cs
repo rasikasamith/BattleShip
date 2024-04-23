@@ -1,5 +1,5 @@
 ﻿using BattleShip.Models;
-using BattleShip.WebAPI.Models;
+using BattleShip.WebAPI.Entities;
 
 namespace BattleShip.WebAPI.Repositories.Contracts
 {
@@ -11,8 +11,8 @@ namespace BattleShip.WebAPI.Repositories.Contracts
 
         public Task<IEnumerable<ShipDto>> GetAllUpdatedShips(int row, int col);
 
-        public Task GetTempNum_1();
+        //public Task GetTempNum_1();
 
-        public Task<int> GetTempNum_2();
+        //public Task<int> GetTempNum_2();
     }
 }
