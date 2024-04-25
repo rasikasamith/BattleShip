@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\DemoBase.cs" />
     <Compile Remove="Pages\ShipsBase.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Counter.razor" />
+    <Content Remove="Pages\Demo.razor" />
+    <Content Remove="Pages\FetchData.razor" />
+    <Content Remove="Pages\PlayerGrid.razor" />
     <Content Remove="Pages\Ships.razor" />
   </ItemGroup>
 

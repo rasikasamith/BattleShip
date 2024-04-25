@@ -5,14 +5,12 @@ namespace BattleShip.WebAPI.Repositories.Contracts
 {
     public interface IGameBoardRepository
     {        
-        public Task<List<ShipDto>> GetComputerPlaceShip();      
+        //public Task<List<ShipDto>> GetComputerPlaceShip();    
 
-        public Task<bool> Hit(int row, int col);
+        //public Task<IEnumerable<ShipDto>> GetAllUpdatedShips(int row, int col);
 
-        public Task<IEnumerable<ShipDto>> GetAllUpdatedShips(int row, int col);
+        public Task<List<Ship>> GetComputerPlaceShip();
 
-        //public Task GetTempNum_1();
-
-        //public Task<int> GetTempNum_2();
+        public Task<IEnumerable<Ship>> GetAllUpdatedShips(int row, int col);
     }
 }

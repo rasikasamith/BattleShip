@@ -14,24 +14,7 @@ namespace BattleShip.WebAPI.Controllers
     public class GameBoardController : ControllerBase
     {
         IGameBoardRepository _gameBoardRepository;
-
-        //Test
-        //private readonly List<string> dataList = new List<string>();
-       
-        //[HttpGet(nameof(GetData))]
-        //public ActionResult<IEnumerable<string>> GetData()
-        //{
-        //    return Ok(dataList);
-        //}
-
-        //[HttpPost]
-        //public IActionResult AddData(string data)
-        //{
-        //    dataList.Add(data);
-        //    return Ok();
-        //}
-
-        //End
+        
         public GameBoardController(IGameBoardRepository gameBoardRepository)
         {
             this._gameBoardRepository = gameBoardRepository;
@@ -41,7 +24,6 @@ namespace BattleShip.WebAPI.Controllers
         [Route(nameof(GetComputerPlaceShipsDemo))]
         public async Task<ActionResult<IEnumerable<ShipDto>>> GetComputerPlaceShipsDemo()
         {
-
             try
             {
                 var ships = await _gameBoardRepository.GetComputerPlaceShip();
@@ -51,8 +33,9 @@ namespace BattleShip.WebAPI.Controllers
                     return NotFound();
                 }
                 else
-                {                    
-                    return Ok(ships);
+                {
+                    var shipsDto= DtoConvertions.ShipToShipDto(ships);
+                    return Ok(shipsDto);
                 }
             }
             catch (Exception)
@@ -87,33 +70,27 @@ namespace BattleShip.WebAPI.Controllers
         }
      
         [HttpGet("GetUpdatedShips/{row:int}/{col:int}")]
-        public async Task<IEnumerable<ShipDto>> GetAllUpdatedShips(int row, int col)
+        public async Task<ActionResult<IEnumerable<ShipDto>>> GetAllUpdatedShips(int row, int col)
         {
             try
             {
                 var result = await _gameBoardRepository.GetAllUpdatedShips(row, col);
-                return result;
+               
+                if (result != null)
+                {
+                    var shipDto = DtoConvertions.ShipToShipDto(result);
+                    return Ok(shipDto);
+                }
+                else
+                {
+                    return NotFound();
+                }
             }
             catch (Exception)
             {
                 throw;
             }
         }        
-
-        //[HttpGet]
-        //[Route(nameof(GetTempNum))]
-        //public async Task<int> GetTempNum()
-        //{
-        //    await _gameBoardRepository.GetTempNum_1();
-        //    var TempNum = await _gameBoardRepository.GetTempNum_2();
-        //    return TempNum;
-        //}
-
-        //[HttpGet("TestObjectTrn/{shipDtos:List<ShipDto>}")]
-        //public async Task<int> TestObjectTrn(List<ShipDto> shipDtos)
-        //{
-        //    return 3;
-        //}
 
     }
 }

@@ -1,18 +1,20 @@
-﻿namespace BattleShip.WebAPI.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace BattleShip.WebAPI.Entities
 {
     public class Node
     {
-        public Node(int rowValue, int colValue, bool isHit, bool isClick)
-        {
-            RowValue = rowValue;
-            ColValue = colValue;
-            IsHit = isHit;
-            IsClick = isClick;
-        }
+        [Key]
+        public int NId {  get; set; }
+        public int  RowValue { get; set; }
+        public int  ColValue { get; set; }
+        public bool IsHit    { get; set; }
+        public bool IsClick  { get; set; }
 
-        public int RowValue { get; set; }
-        public int ColValue { get; set; }
-        public bool IsHit { get; set; }
-        public bool IsClick { get; set; }
+        public int SId { get; set; }
+
+        [ForeignKey("SId")]
+        public Ship Ship {  get; set; }
     }
 }

@@ -68,25 +68,7 @@ namespace BattleShip.UI.Service
                 throw;
             }
         }
-
-        //public async Task<IEnumerable<BattleShipDto>> GetShips()
-        //{
-        //    try
-        //    {
-        //        var ships = await this._httpClient.GetFromJsonAsync<IEnumerable<BattleShipDto>>("api/GameBoard/GetShips");
-        //        return ships;
-        //    }
-        //    catch (Exception)
-        //    {               
-        //        throw;
-        //    }
-        //}
-
-        //public async Task<int> GetTempNum()
-        //{
-        //    var response = await this._httpClient.GetAsync("api/GameBoard/GetTempNum");
-        //    return await response.Content.ReadFromJsonAsync<int>();            
-        //}
+              
 
     }
 

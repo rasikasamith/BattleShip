@@ -1,17 +1,17 @@
-﻿namespace BattleShip.WebAPI.Entities
+﻿using BattleShip.Models;
+using System.ComponentModel.DataAnnotations;
+
+namespace BattleShip.WebAPI.Entities
 {
     public class Ship
     {
+        [Key]
+        public int SId { get; set; }
         public string Name { get; set; }
         public int Size { get; set; }
         public int Hits { get; set; }
 
-        public Ship(string name,int size)
-        {
-            Name = name;
-            Size = size;
-            Hits = 0;
-        }   
-
+        
+        public List<Node> CoveringAera { get; set; }
     }
 }

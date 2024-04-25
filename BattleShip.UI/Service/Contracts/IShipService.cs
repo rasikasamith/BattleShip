@@ -9,8 +9,6 @@ namespace BattleShip.UI.Service.Contracts
         Task<bool> UserFireAShot(int row, int col);
 
         Task<IEnumerable<ShipDto>> GetAllUpdatedShips(int row, int col);
-
-        //Task<IEnumerable<BattleShipDto>> GetShips();
-        //Task<int> GetTempNum();
+            
     }
 }

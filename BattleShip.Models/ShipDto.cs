@@ -8,6 +8,7 @@ namespace BattleShip.Models
 {
     public  class ShipDto
     {
+        public int SId { get; set; }
         public string Name { get; set; }
         public int Size { get; set; }
         public int Hits { get; set; }
