@@ -158,5 +158,27 @@ namespace BattleShip.WebAPI.Repositories
             return AllShipsUpdated;
         }
 
+        //public async Task<IEnumerable<Ship>> UpdateShipStatus(int row, int col)
+        //{
+        //    foreach (var item in AllShips)
+        //    {
+        //        foreach (var node in item.CoveringAera)
+        //        {
+        //            if ((node.RowValue == row) && (node.ColValue == col))
+        //            {
+        //                node.IsHit = true;
+        //                item.Hits++;
+        //            }
+        //        }
+        //    }
+
+        //    IEnumerable<Ship> AllShipsUpdated = AllShips;
+
+        //    //Add fired node
+        //    SuccesfullTargerts.Add((row, col));
+
+        //    return AllShipsUpdated;
+        //}
+
     }
 }

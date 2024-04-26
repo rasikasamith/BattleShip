@@ -12,5 +12,8 @@ namespace BattleShip.WebAPI.Repositories.Contracts
         public Task<List<Ship>> GetComputerPlaceShip();
 
         public Task<IEnumerable<Ship>> GetAllUpdatedShips(int row, int col);
+
+        //public Task<IEnumerable<Ship>> UpdateShipStatus(int row, int col);
+      
     }
 }

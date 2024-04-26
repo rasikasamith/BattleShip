@@ -4,6 +4,7 @@ using System.Net.Http;
 using System;
 using System.Net.Http.Json;
 using BattleShip.UI.Pages;
+using System.Collections.Generic;
 
 namespace BattleShip.UI.Service
 {
@@ -68,7 +69,33 @@ namespace BattleShip.UI.Service
                 throw;
             }
         }
-              
+
+        //public async Task<IEnumerable<ShipDto>> UpdateShipStatus(int row, int col)
+        //{
+        //    try
+        //    {
+        //        var response = await _httpClient.PatchAsync($"api/GameBoard/GetUpdatedShips/{row}/{col}",null);
+        //        //HttpResponseMessage response = await _httpClient.PatchAsync(requestUri, null);
+
+
+        //        //return response.Content.ReadFromJsonAsync<IEnumerable<ShipDto>>();
+        //        if (response.IsSuccessStatusCode)
+        //        {
+        //            return await response.Content.ReadFromJsonAsync<IEnumerable<ShipDto>>();
+        //        }
+        //        else
+        //        {
+        //            return Enumerable.Empty<ShipDto>();
+        //        }
+
+        //        //return (IEnumerable<ShipDto>)response;
+        //    }
+        //    catch
+        //    {
+        //        throw;
+        //    }
+        //}
+
 
     }
 

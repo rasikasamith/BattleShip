@@ -22,4 +22,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BattleShip.WebAPI\BattleShip.WebAPI.csproj" />
+  </ItemGroup>
+
 </Project>

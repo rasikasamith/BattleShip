@@ -13,11 +13,11 @@ namespace BattleShip.WebAPI.Controllers
     [ApiController]
     public class GameBoardController : ControllerBase
     {
-        IGameBoardRepository _gameBoardRepository;
+       private readonly IGameBoardRepository _gameBoardRepository;
         
         public GameBoardController(IGameBoardRepository gameBoardRepository)
         {
-            this._gameBoardRepository = gameBoardRepository;
+            _gameBoardRepository = gameBoardRepository;
         }       
        
         [HttpGet]
@@ -68,14 +68,14 @@ namespace BattleShip.WebAPI.Controllers
                 throw;
             }
         }
-     
+
         [HttpGet("GetUpdatedShips/{row:int}/{col:int}")]
         public async Task<ActionResult<IEnumerable<ShipDto>>> GetAllUpdatedShips(int row, int col)
         {
             try
             {
                 var result = await _gameBoardRepository.GetAllUpdatedShips(row, col);
-               
+
                 if (result != null)
                 {
                     var shipDto = DtoConvertions.ShipToShipDto(result);
@@ -90,7 +90,30 @@ namespace BattleShip.WebAPI.Controllers
             {
                 throw;
             }
-        }        
+        }
+
+        //[HttpPatch("UpdateShipStatus/{row:int}/{col:int}")]
+        //public async Task<ActionResult<IEnumerable<ShipDto>>> UpdateShipStatus(int row, int col)
+        //{
+        //    try
+        //    {
+        //        var result = await _gameBoardRepository.UpdateShipStatus(row, col);
+
+        //        if (result != null)
+        //        {
+        //            var shipDto = DtoConvertions.ShipToShipDto(result);
+        //            return Ok(shipDto);
+        //        }
+        //        else
+        //        {
+        //            return NotFound();
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //}
 
     }
 }

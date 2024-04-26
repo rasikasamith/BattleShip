@@ -66,7 +66,8 @@ namespace BattleShip.UI.Pages
                 {
                     //await _jSRuntime.InvokeVoidAsync("alert", "You hit the target");
                     AllShipsDemo = (List<ShipDto>)await _shipService.GetAllUpdatedShips(Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1]));
-
+                    //AllShipsDemo = (List<ShipDto>)await _shipService.UpdateShipStatus(Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1]));
+                    
                     foreach (ShipDto ship in AllShipsDemo)
                     {
                         foreach (var area in ship.CoveringAera)

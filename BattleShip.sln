@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleShip.UI", "BattleShip
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BattleShip.Models", "BattleShip.Models\BattleShip.Models.csproj", "{4BA5BB6B-F94A-4D32-9DC5-09EB1C7D69A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleShip.Test", "BattleShip.Test\BattleShip.Test.csproj", "{DEB80B94-7776-4E4A-8B8E-5C0C60F0E45D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BattleShip.WebAPI.Test", "BattleShip.Test\BattleShip.WebAPI.Test.csproj", "{DEB80B94-7776-4E4A-8B8E-5C0C60F0E45D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
