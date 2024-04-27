@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BattleShip.WebAPI.Test
 {
     public class GameBoardControllerTest
@@ -25,11 +26,11 @@ namespace BattleShip.WebAPI.Test
         }
 
         [Fact]
-        public void GetComputerPlaceShipsDemoTest()
+        public void GetComputerPlaceShipsTest()
         {
             //Arrange
             //Act
-            var result = _controller.GetComputerPlaceShipsDemo();
+            var result = _controller.GetComputerPlaceShips();
             //Assert
             Assert.IsType<ActionResult<IEnumerable<ShipDto>>>(result.Result);
              
@@ -61,10 +62,10 @@ namespace BattleShip.WebAPI.Test
         {
             //Arrage 
             //Act
-            var result= _controller.GetAllUpdatedShips(row,col); 
+            var result= _controller.GetAllUpdatedShips(row,col);
 
             //Assert
-            Assert.IsType<OkObjectResult>(result.Result);
+            //Assert.IsType<OkObjectResult>(result.Result);
             Assert.IsType<ActionResult<IEnumerable<ShipDto>>>(result.Result);
 
             var list = result.Result.Result as OkObjectResult;

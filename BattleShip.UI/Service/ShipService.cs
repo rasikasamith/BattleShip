@@ -17,13 +17,12 @@ namespace BattleShip.UI.Service
             this._httpClient= httpClient;
         }         
 
-        public async Task<IEnumerable<ShipDto>> GetAllShipsDemo()
+        public async Task<IEnumerable<ShipDto>> GetAllShips()
         {
             try
             {
-                    var response = await this._httpClient.GetFromJsonAsync<IEnumerable<ShipDto>>("api/GameBoard/GetComputerPlaceShipsDemo");
-                    return response;
-               
+                    var response = await this._httpClient.GetFromJsonAsync<IEnumerable<ShipDto>>("api/GameBoard/GetComputerPlaceShips");
+                    return response;               
             }
             catch (Exception)
             {                
@@ -54,7 +53,6 @@ namespace BattleShip.UI.Service
             {
                 throw;
             }
-
         }
 
         public async Task<IEnumerable<ShipDto>> GetAllUpdatedShips(int row, int col)
@@ -68,35 +66,7 @@ namespace BattleShip.UI.Service
             {
                 throw;
             }
-        }
-
-        //public async Task<IEnumerable<ShipDto>> UpdateShipStatus(int row, int col)
-        //{
-        //    try
-        //    {
-        //        var response = await _httpClient.PatchAsync($"api/GameBoard/GetUpdatedShips/{row}/{col}",null);
-        //        //HttpResponseMessage response = await _httpClient.PatchAsync(requestUri, null);
-
-
-        //        //return response.Content.ReadFromJsonAsync<IEnumerable<ShipDto>>();
-        //        if (response.IsSuccessStatusCode)
-        //        {
-        //            return await response.Content.ReadFromJsonAsync<IEnumerable<ShipDto>>();
-        //        }
-        //        else
-        //        {
-        //            return Enumerable.Empty<ShipDto>();
-        //        }
-
-        //        //return (IEnumerable<ShipDto>)response;
-        //    }
-        //    catch
-        //    {
-        //        throw;
-        //    }
-        //}
-
-
+        }    
     }
 
 }

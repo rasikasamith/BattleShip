@@ -21,8 +21,8 @@ namespace BattleShip.WebAPI.Controllers
         }       
        
         [HttpGet]
-        [Route(nameof(GetComputerPlaceShipsDemo))]
-        public async Task<ActionResult<IEnumerable<ShipDto>>> GetComputerPlaceShipsDemo()
+        [Route(nameof(GetComputerPlaceShips))]
+        public async Task<ActionResult<IEnumerable<ShipDto>>> GetComputerPlaceShips()
         {
             try
             {
@@ -91,29 +91,6 @@ namespace BattleShip.WebAPI.Controllers
                 throw;
             }
         }
-
-        //[HttpPatch("UpdateShipStatus/{row:int}/{col:int}")]
-        //public async Task<ActionResult<IEnumerable<ShipDto>>> UpdateShipStatus(int row, int col)
-        //{
-        //    try
-        //    {
-        //        var result = await _gameBoardRepository.UpdateShipStatus(row, col);
-
-        //        if (result != null)
-        //        {
-        //            var shipDto = DtoConvertions.ShipToShipDto(result);
-        //            return Ok(shipDto);
-        //        }
-        //        else
-        //        {
-        //            return NotFound();
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    }
-        //}
-
+               
     }
 }

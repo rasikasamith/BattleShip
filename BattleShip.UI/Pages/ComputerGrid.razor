@@ -6,17 +6,25 @@
 
 <div class="row justify-content-center">
 <h2 class="row justify-content-center">Enemy Fleet</h2>
-<br /><br />
+    <br /><br /><br />
 <div class="row">
         <div class="col-md-6 row justify-content-end">
             <table class="table table-bordered" style="width:500px; height:500px; border-collapse: collapse;">
+                <thead><tr>
+                    @for(int i=0;i<11;i++)
+                    {
+                    <th><span>@(i)</span></th>
+                    }
+                    </tr>
+                </thead>
+                <tbody>
                 @for (int i = 0; i < 10; i++)
                 {
                     <tr style="height: calc(100% / 10);">
+                            <td><span><b>@(i + 1)</b></span></td>
                         @for (int j = 0; j < 10; j++)
                         {
-
-                            ShipDto? selectedShip = AllShipsDemo?.FirstOrDefault(ship =>
+                            ShipDto? selectedShip = AllShips?.FirstOrDefault(ship =>
                             ship.CoveringAera.Any(node => node.RowValue == i && node.ColValue == j));
 
                             String position = i.ToString() + "," + j.ToString();
@@ -28,8 +36,7 @@
                                     <td @onclick="() => HandleClick(position)"
                                         class="blast-effect"
                                         style="width: calc(100% / 10); border: 1px solid black; background-color:red">
-                                        <span id="shipInfo" hidden="hidden">@i;@j;@selectedShip.Name;</span>
-                                        @* <span id="shipInfo">@i;@j;@selectedShip.Name;</span> *@
+                                        <span id="shipInfo" hidden="hidden">@i;@j;@selectedShip.Name;</span>                                       
                                     </td>
                                 }
                                 else
@@ -37,8 +44,7 @@
                                     <td @onclick="() => HandleClick(position)"
                                         style="width: calc(100% / 10); border: 1px solid black; background-color:lightblue">
 
-                                        <span id="shipInfo" hidden="hidden">@i;@j;@selectedShip.Name;</span>
-                                        @* <span id="shipInfo">@i;@j;@selectedShip.Name;</span> *@
+                                        <span id="shipInfo" hidden="hidden">@i;@j;@selectedShip.Name;</span>                                       
                                     </td>
                                 }
                             }
@@ -49,8 +55,7 @@
                                     <td @onclick="() => HandleClick(position)"
                                         style="width: calc(100% / 10); border: 1px solid black; background-color:lightblue">
 
-                                        <span id="shipInfo" hidden="hidden">@i;@j;N</span>
-                                        @* <span id="shipInfo">@i;@j;N</span> *@
+                                        <span id="shipInfo" hidden="hidden">@i;@j;N</span>                                       
                                     </td>
                                 }
                                 else
@@ -60,16 +65,14 @@
                                         <td @onclick="() => HandleClick(position)"
                                             class="blast-effect"
                                             style="width: calc(100% / 10); border: 1px solid black; background-color:forestgreen">
-                                            <span id="shipInfo" hidden="hidden">@i;@j;N</span>
-                                            @*<span id="shipInfo">@i;@j;N</span> *@
+                                            <span id="shipInfo" hidden="hidden">@i;@j;N</span>                                            
                                         </td>
                                     }
                                     else
                                     {
                                         <td @onclick="() => HandleClick(position)"
                                             style="width: calc(100% / 10); border: 1px solid black; background-color:lightblue">
-                                            <span id="shipInfo" hidden="hidden">@i;@j;N</span>
-                                            @* <span id="shipInfo">@i;@j;N</span> *@
+                                            <span id="shipInfo" hidden="hidden">@i;@j;N</span>                                            
                                         </td>
                                     }
                                 }
@@ -77,21 +80,50 @@
                         }
                     </tr>
                 }
+                </tbody>
             </table>
         </div>
 
-        <div class="col-md-4">          
-            <table class="table table-bordered" style=" border-collapse: collapse;">
+   
+        <div class="col-md-4">
+            <table class="table table-bordered" style="border-collapse: collapse;">
                 <thead>
-                    <tr style="text-align:center"><th>Ship</th><th>Total Hits</th><th>Status</th></tr>
+                    <tr style="text-align: center">
+                        <th style="width: 33%;">Ship</th>
+                        <th style="width: 33%;">Total Hits</th>
+                        <th style="width: 33%;">Status</th>
+                    </tr>
                 </thead>
                 <tbody>
-                    <tr><td>BattleShip</td><td>@AllHits["BattleShip"].ToString()/5</td><td>@BattleShipStatus</td></tr>
-                    <tr><td>Distroyer 1</td><td>@AllHits["Distroyer_1"].ToString()/2</td><td>@Distroyer_1Status</td></tr>
-                    <tr><td>Distroyer 2</td><td>@AllHits["Distroyer_2"].ToString()/2</td><td>@Distroyer_2Status</td></tr>
-                    <tr><td style="font-size:larger">Score</td><td colspan="2" style="color:darkred;font-size:larger;text-align:center"><span>@Marks</span></td></tr>
-                </tbody>               
+                    <tr>
+                        <td>BattleShip</td>
+                        <td>@AllHits["BattleShip"].ToString()/5</td>
+                        <td>@BattleShipStatus</td>
+                    </tr>
+                    <tr>
+                        <td>Distroyer 1</td>
+                        <td>@AllHits["Distroyer_1"].ToString()/2</td>
+                        <td>@Distroyer_1Status</td>
+                    </tr>
+                    <tr>
+                        <td>Distroyer 2</td>
+                        <td>@AllHits["Distroyer_2"].ToString()/2</td>
+                        <td>@Distroyer_2Status</td>
+                    </tr>
+                    <tr>
+                        <td style="font-size: larger">Score</td>
+                        <td colspan="2" style="color: red; font-size: larger; text-align: center"><span>@Marks</span></td>
+                    </tr>                  
+                </tbody>
             </table>
+            <span style="color:green;" >
+                @if (Marks == 9000)
+                {
+                    <div><strong>Congratulations ! You won the game.</strong></div>
+                }
+            </span>
+            
         </div>
+
 </div> 
 </div>

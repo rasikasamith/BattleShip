@@ -9,25 +9,19 @@ using System;
 namespace BattleShip.UI.Pages
 {
     public class ComputerGridBase: ComponentBase
-    {
-        [Inject]
-        public IJSRuntime _jSRuntime { get; set; }
-
+    {        
         [Inject]
         IShipService _shipService { get; set; }
 
-        public List<ShipDto> AllShipsDemo { get; set; }            
-
+        public List<ShipDto> AllShips { get; set; } 
         public List<(int, int)> SuccesfullTargerts = new List<(int, int)>();
-        public List<(int, int)> MissedTargets = new List<(int, int)>();
-        private List<(int, int)> clickedCells = new List<(int, int)>();
-
-        public bool IsClicked(int row, int col) => clickedCells.Contains((row, col));
-
-        public Dictionary<String, int> AllHits { get; set; } = new Dictionary<string, int>();        
-              
+        public List<(int, int)> MissedTargets = new List<(int, int)>(); 
+        public Dictionary<String, int> AllHits { get; set; } = new Dictionary<string, int>(); 
         public int Marks { get; set; } = 0;
-        
+
+        public string BattleShipStatus = "No Damage";
+        public string Distroyer_1Status = "No Damage";
+        public string Distroyer_2Status = "No Damage";
 
         public ComputerGridBase()
         {
@@ -41,12 +35,9 @@ namespace BattleShip.UI.Pages
 
         protected override async Task OnInitializedAsync()
         {        
-            AllShipsDemo = (List<ShipDto>)await _shipService.GetAllShipsDemo();          
+            AllShips = (List<ShipDto>)await _shipService.GetAllShips();          
         }
 
-        public string BattleShipStatus  = "No Damage";
-        public string Distroyer_1Status = "No Damage";
-        public string Distroyer_2Status = "No Damage";
 
         // Method to handle cell clicks
         public async Task HandleClick(string position)
@@ -63,12 +54,10 @@ namespace BattleShip.UI.Pages
             if (feedback)
             {
                 if (result == false)
-                {
-                    //await _jSRuntime.InvokeVoidAsync("alert", "You hit the target");
-                    AllShipsDemo = (List<ShipDto>)await _shipService.GetAllUpdatedShips(Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1]));
-                    //AllShipsDemo = (List<ShipDto>)await _shipService.UpdateShipStatus(Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1]));
-                    
-                    foreach (ShipDto ship in AllShipsDemo)
+                {                   
+                    AllShips = (List<ShipDto>)await _shipService.GetAllUpdatedShips(Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1]));
+                                        
+                    foreach (ShipDto ship in AllShips)
                     {
                         foreach (var area in ship.CoveringAera)
                         {
@@ -83,7 +72,7 @@ namespace BattleShip.UI.Pages
                         }
                     }
 
-                    var results = AllShipsDemo.Select(x => new { x.Name, x.Hits }).Where(x => x.Hits > 0).FirstOrDefault();
+                    var results = AllShips.Select(x => new { x.Name, x.Hits }).Where(x => x.Hits > 0).FirstOrDefault();
 
                     if (results.Name == "BattleShip")
                     {
@@ -146,11 +135,10 @@ namespace BattleShip.UI.Pages
                 }
             }
             else
-            {
-                //await _jSRuntime.InvokeVoidAsync("alert", "You missed the target");
+            {            
                 MissedTargets.Add((Convert.ToInt16(valus[0]), Convert.ToInt16(valus[1])));
                 
-                foreach (ShipDto ship in AllShipsDemo)
+                foreach (ShipDto ship in AllShips)
                 {
                     foreach (var area in ship.CoveringAera)
                     {
@@ -163,20 +151,10 @@ namespace BattleShip.UI.Pages
                         }
                     }
                 }
-
             }   
 
             StateHasChanged();
-        }
-
-        //private void HandleClick(int row, int col)
-        //{
-        //    if (!IsClicked(row, col))
-        //    {
-        //        clickedCells.Add((row, col));
-        //        StateHasChanged(); 
-        //    }
-        //}
+        }       
 
     }
 }
