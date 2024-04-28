@@ -10,7 +10,6 @@ namespace BattleShip.WebAPI.Entities
         public string Name { get; set; }
         public int Size { get; set; }
         public int Hits { get; set; }
-
         
         public List<Node> CoveringAera { get; set; }
     }

@@ -6,7 +6,7 @@ namespace BattleShip.WebAPI.Entities
     public class Node
     {
         [Key]
-        public int NId {  get; set; }
+        public int  NId {  get; set; }
         public int  RowValue { get; set; }
         public int  ColValue { get; set; }
         public bool IsHit    { get; set; }
