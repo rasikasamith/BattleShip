@@ -39,13 +39,11 @@ namespace BattleShip.UI.Service
 
                 // Check if the response is successful
                 if (response.IsSuccessStatusCode)
-                {
-                    // Read the response content as a boolean value
+                {                    
                     return await response.Content.ReadFromJsonAsync<bool>();
                 }
                 else
-                {
-                    // If the response is not successful, throw an exception with the status code
+                {                    
                     throw new HttpRequestException($"Failed to call API. Status code: {response.StatusCode}");
                 }
             }
