@@ -34,7 +34,7 @@ namespace BattleShip.WebAPI.Test
             //Assert
             Assert.IsType<ActionResult<IEnumerable<ShipDto>>>(result.Result);
              
-            var list = result.Result.Result as OkObjectResult;
+            var list = result.Result.Result as OkObjectResult; 
             Assert.IsType<List<ShipDto>>(list.Value);
 
             var listShips = list.Value as List<ShipDto>;
